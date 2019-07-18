@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LogService } from '../log.service'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   title: String = "FinCEN File Submission"
-  constructor() { }
+  constructor(private logger: LogService) { }
 
   ngOnInit() {
   }
