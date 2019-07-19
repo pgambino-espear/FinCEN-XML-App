@@ -22,6 +22,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 
 import { LogService } from './log.service';
 import { FinCENSubmissionComponent } from './fin-cen-submission/fin-cen-submission.component';
+import { UploadModule } from './upload/upload.module'
 //Material
 import {
 
@@ -69,6 +70,7 @@ import { UploadService } from './app/upload.service';
     ReactiveFormsModule,
     //FX Layout
     FlexLayoutModule,
+    UploadModule
   ],
   providers: [LogService, DatePipe],
   bootstrap: [AppComponent]

@@ -31,7 +31,7 @@ export class FinCENSubmissionComponent implements OnInit {
     let date = new Date();
     console.log(this.userForm.value)
     console.log(this.userForm.value.fileType + "." + this.datePipe.transform(date, "yyyyMMddHHss") + ".<" + this.userForm.value.username + ">")
+    return (this.userForm.value.fileType + "." + this.datePipe.transform(date, "yyyyMMddHHss") + ".<" + this.userForm.value.username + ">")
   }
 
-  formatDate
 }
