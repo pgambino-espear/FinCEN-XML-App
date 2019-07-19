@@ -11,12 +11,13 @@ export class UserFormComponent implements OnInit {
   fxGapV = '1%';
 
   constructor(private formBuilder: FormBuilder) {
-    this.userForm = this.formBuilder.group({
-      username: ''
-    })
+
   }
 
   ngOnInit() {
+    this.userForm = this.formBuilder.group({
+      username: ''
+    })
   }
 
 }

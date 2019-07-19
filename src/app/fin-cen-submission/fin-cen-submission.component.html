@@ -1,0 +1,15 @@
+<form [formGroup]="userForm">
+    <div fxLayout="column" [fxLayoutGap]="fxGapV">
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username">
+        </mat-form-field>
+    </div>
+    <mat-radio-group formControlName="fileType">
+        <mat-radio-button value="BCTRST">CTR</mat-radio-button>
+        <mat-radio-button value="BSARST">SAR</mat-radio-button>
+        <mat-radio-button value="DOEPST">DOEP</mat-radio-button>
+        <mat-radio-button value="FFBARST">FBAR</mat-radio-button>
+    </mat-radio-group>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+</form>
