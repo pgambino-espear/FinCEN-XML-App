@@ -1,17 +1,36 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
+
 import {
   HttpClient,
   HttpRequest,
   HttpEventType,
   HttpResponse
 } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
+declare const fs: any;
+
+//From the form, 
 
 const url = 'http://localhost:3000/upload';
 
 @Injectable()
 export class UploadService {
-  constructor(private http: HttpClient) { }
+
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
+  formattedName
+  constructor(private http: HttpClient) {
+  }
+
+  changeMessage(message: string) {
+    this.messageSource.next(message)
+  }
+
+  getMessage() {
+    this.currentMessage.forEach(formattedName => {
+      this.formattedName = formattedName
+    });
+  }
 
   public upload(
     files: Set<File>
@@ -21,9 +40,12 @@ export class UploadService {
 
     files.forEach(file => {
       // create a new multipart-form for every file
+      this.getMessage();
       const formData: FormData = new FormData();
-      formData.append('file', file, file.name);
-
+      formData.append('file', file, `${this.formattedName}.xml`);
+      // rename(file.name, 'loremipsum', function (err) {
+      //   if (err) console.log('ERROR: ' + err);
+      // })
       console.log("File name from inside upload", file.name)
 
       // create a http-post request and pass the form
@@ -31,6 +53,8 @@ export class UploadService {
       const req = new HttpRequest('POST', url, formData, {
         reportProgress: true
       });
+
+      console.log(req.body)
 
       // create a new progress-subject for every file
       const progress = new Subject<number>();

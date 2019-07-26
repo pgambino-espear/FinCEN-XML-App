@@ -11,6 +11,10 @@ var corsOptions = {
 
 server.use(cors(corsOptions));
 
+server.get('/', (req, res) => {
+  res.json("Hello");
+});
+
 server.post('/upload', upload);
 
 server.listen(3000, () => {
