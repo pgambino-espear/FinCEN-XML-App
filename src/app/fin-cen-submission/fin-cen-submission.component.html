@@ -5,13 +5,20 @@
             <input matInput formControlName="username">
         </mat-form-field>
     </div>
-    <mat-radio-group formControlName="fileType">
-        <mat-radio-button value="BCTRST">CTR</mat-radio-button>
+    <div>
+        <h2>File type</h2>
+        <mat-radio-group formControlName="fileType">
+        <mat-radio-button value="BCTRST" (click)="showFileType()">CTR</mat-radio-button>
         <mat-radio-button value="BSARST">SAR</mat-radio-button>
         <mat-radio-button value="DOEPST">DOEP</mat-radio-button>
         <mat-radio-button value="FFBARST">FBAR</mat-radio-button>
     </mat-radio-group>
-    <button color="accent" style="display:block; margin-top:1rem;" mat-raised-button
-        (click)="openUploadDialog()">Upload</button>
-    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    </div>
+    
+    <div *ngIf="((userForm.value.fileType != null) && (userForm.value.username != null))">
+        <button color="accent" style="display:block; margin-top:1rem;" mat-raised-button
+        (click)="onSubmit()"  (click)="openUploadDialog()">Upload</button>
+    </div>
+    
+    
 </form>

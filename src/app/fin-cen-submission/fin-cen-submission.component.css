@@ -8,5 +8,9 @@
 }
 
 .mat-form-field {
-  width: 23.5%;
+  width: 20rem;
+}
+
+form {
+  margin-top: 2rem;
 }

@@ -21,9 +21,9 @@ module.exports = function upload(req, res) {
     let formattedName = file.name;
     client.connect(config);
     client.on('ready', function() {
-      console.log("Hello from the client!");
-      console.log("file name from inside the client: ", file.name)
-      console.log("Formatted name from inside the client: ",  formattedName)
+      // console.log("Hello from the client!");
+      // console.log("file name from inside the client: ", file.name)
+      // console.log("Formatted name from inside the client: ",  formattedName)
       client.put(file.path, file.name, function(err) {
         if(err) throw err;
           client.end();
@@ -32,7 +32,7 @@ module.exports = function upload(req, res) {
 
   
     console.log("File name from inside form on: ", file.name)
-    console.log("Formatted name from inside form on: ", formattedName)
+    // console.log("Formatted name from inside form on: ", formattedName)
     console.log(file);
     console.log("File name:", file.name)
     readStream = fs.createReadStream(file.path);

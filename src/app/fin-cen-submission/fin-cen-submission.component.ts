@@ -28,8 +28,8 @@ export class FinCENSubmissionComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      username: '',
-      fileType: ''
+      username: null,
+      fileType: null
     })
     this.uploadService.currentMessage.subscribe(message => this.message = message)
   }
@@ -43,6 +43,10 @@ export class FinCENSubmissionComponent implements OnInit {
     this.uploadService.changeMessage(this.message);
     console.log(this.uploadService.currentMessage)
     return this.message;
+  }
+
+  showFileType() {
+    console.log(this.userForm.value.fileType);
   }
 
   public openUploadDialog() {
