@@ -19,6 +19,8 @@ export class UploadService {
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
   formattedName
+  seqIndex: number = 0;
+  finalSeq: string = '';
   constructor(private http: HttpClient) {
   }
 
@@ -32,6 +34,10 @@ export class UploadService {
     });
   }
 
+  increment() {
+    return this.seqIndex++;
+  }
+
   public upload(
     files: Set<File>
   ): { [key: string]: { progress: Observable<number> } } {
@@ -39,13 +45,23 @@ export class UploadService {
     const status: { [key: string]: { progress: Observable<number> } } = {};
 
     files.forEach(file => {
+      this.increment();
+      if(this.seqIndex < 10){
+        this.finalSeq = `00${this.seqIndex}`
+      } else if (this.seqIndex <= 99 ) {
+        this.finalSeq = `0${this.seqIndex}`
+      } else {
+        this.finalSeq = `${this.seqIndex}`;
+      }
       // create a new multipart-form for every file
       this.getMessage();
       const formData: FormData = new FormData();
-      formData.append('file', file, `${this.formattedName}.xml`);
+      //Actual file upload append
+      formData.append('file', file, `${this.formattedName}${this.finalSeq}.xml`);
       // rename(file.name, 'loremipsum', function (err) {
       //   if (err) console.log('ERROR: ' + err);
       // })
+      // formData.append('file', file, `File${this.finalSeq}.xml`);
       console.log("File name from inside upload", file.name)
 
       // create a http-post request and pass the form
@@ -83,6 +99,8 @@ export class UploadService {
     });
 
     // return the map of progress.observables
+    this.seqIndex = 0;
+    this.finalSeq = ''
     return status;
   }
 }

@@ -38,7 +38,7 @@ export class FinCENSubmissionComponent implements OnInit {
     let date = new Date();
     console.log(this.userForm.value)
     console.log(this.userForm.value.fileType + "" + this.datePipe.transform(date, "yyyyMMddHHss") + "<" + this.userForm.value.username + ">")
-    this.message = this.userForm.value.fileType + "" + this.datePipe.transform(date, "yyyyMMddHHss") + "001" + this.userForm.value.username + ""
+    this.message = this.userForm.value.fileType + "" + this.datePipe.transform(date, "yyyyMMddHHss") + this.userForm.value.username;
     console.log("this.formattedName: ", this.message)
     this.uploadService.changeMessage(this.message);
     console.log(this.uploadService.currentMessage)
