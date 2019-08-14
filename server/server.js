@@ -10,6 +10,7 @@ var corsOptions = {
 };
 
 server.use(cors(corsOptions));
+server.use(express.json());
 
 server.get('/', (req, res) => {
   res.json("Hello");
