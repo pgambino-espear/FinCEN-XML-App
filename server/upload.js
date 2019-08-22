@@ -3,6 +3,7 @@ const fs = require('fs');
 const PromiseFtp = require('promise-ftp');
 const ftp = new PromiseFtp;
 const Client = require('ftp');
+const qs = require('querystring')
 
 module.exports = function upload(req, res) {
 
@@ -12,6 +13,19 @@ module.exports = function upload(req, res) {
   //   console.log(req)
   //   res.status(200).json(req.body)
   // }
+  // let body = '';
+  // req.on('data', data => {
+  //   console.log("Data to string: ", data.toString());
+  //   body += data;
+  //   // console.log(req)
+  // })
+
+  // req.on('end', function () {
+  //   let post = qs.parse(body);
+  //   // console.log("Post body: ", post);
+  //   console.log(post);
+  //   res.end();
+  // });
 
   config = {
     host: 'localhost',
@@ -19,20 +33,33 @@ module.exports = function upload(req, res) {
     user: 'audreykreiser',
     password: '1344'
   }
-  req.on('data', (data) => {
+  let body = "";
+  req.on('data', data => {
+    // console.log(req.body)
+    // console.log(data.toString());
+    body += data.toString();
+  })
+
+  req.on('end', () => {
     let client = new Client();
     client.connect(config);
     const formattedName = req.headers['content-disposition'];
-    client.on('ready', function () {
+    // console.log(body);
+
+    // console.log(data.toString());
+    let pattern = /<\?xml[\s\S.]*<\/fc2:EFilingBatchXML>/i;
+    let result = body.match(pattern);
+    // console.log(result[0]);
+
+    client.on('ready', () => {
       console.log("Hello from the client!")
-      console.log("File name: ", formattedName);
-      client.put(data.toString(), formattedName, function (error) {
+      // console.log("File name: ", formattedName);
+      client.put(result[0], formattedName, function (error) {
         if (error) throw error;
         client.end();
       })
+      res.end();
     })
-
-    res.end(data);
   })
 
   // config = {
