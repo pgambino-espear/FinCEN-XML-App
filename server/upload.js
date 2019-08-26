@@ -1,3 +1,5 @@
+"use strict"
+
 const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 const PromiseFtp = require('promise-ftp');
