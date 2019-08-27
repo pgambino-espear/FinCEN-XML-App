@@ -11,7 +11,7 @@ module.exports = function upload(req, res) {
   var testForm = new IncomingForm();
 
   const config = {
-    host: 'Audreys-MacBook-Pro.local',
+    host: 'localhost',
     port: 21,
     user: 'audreykreiser',
     password: '1344'
