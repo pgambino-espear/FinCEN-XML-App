@@ -10,7 +10,7 @@ module.exports = function upload(req, res) {
 
   var testForm = new IncomingForm();
 
-  config = {
+  const config = {
     host: 'Audreys-MacBook-Pro.local',
     port: 21,
     user: 'audreykreiser',
